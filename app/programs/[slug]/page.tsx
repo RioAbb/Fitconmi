@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import Link from "next/link";
 import ExerciseAccordion from "../../components/exercise-accordion";
 import PrintButton from "../../components/print-button";
 import { SiteFooter, SiteNavbar } from "../../components/site-chrome";
@@ -46,37 +47,18 @@ export default async function ProgramDetailPage({ params }: Props) {
   const { slug } = await params;
   const program = programBySlug(slug);
   if (!program) notFound();
-  const exerciseImages: Record<string, string> = {
-    "Goblet Squat":
-      "https://images.unsplash.com/photo-1434682881908-b43d0467b798?w=1200&q=80",
-    "Romanian Deadlift":
-      "https://images.unsplash.com/photo-1534367610401-9f5ed68180aa?w=1200&q=80",
-    "Barbell Bench Press":
-      "https://images.unsplash.com/photo-1579758629938-03607ccdbaba?w=1200&q=80",
-    "Lat Pulldown":
-      "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=1200&q=80",
-    "Back Squat":
-      "https://images.unsplash.com/photo-1594737625785-c7f12f6f89e8?w=1200&q=80",
-    Deadlift:
-      "https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=1200&q=80",
-    "Tempo Run":
-      "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=1200&q=80",
-    "Assault Bike Intervals":
-      "https://images.unsplash.com/photo-1599058918144-1ffabb6ab9a0?w=1200&q=80",
-    "World's Greatest Stretch":
-      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&q=80",
-    "90/90 Hip Switch":
-      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&q=80",
-    "Incline Dumbbell Press":
-      "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=1200&q=80",
-    "Walking Lunge":
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=80",
-  };
-
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       <SiteNavbar />
       <main className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="no-print mb-6">
+          <Link
+            href="/programs"
+            className="inline-flex rounded-full border border-white/20 px-4 py-2 text-sm text-[#d1d5db] transition-colors hover:border-[#a3e635] hover:text-[#a3e635]"
+          >
+            ← Back
+          </Link>
+        </div>
         <section className="relative overflow-hidden rounded-2xl border border-white/10">
           <img
             src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1800&q=80"
@@ -128,7 +110,7 @@ export default async function ProgramDetailPage({ params }: Props) {
 
         <section className="mt-10">
           <h2 className="text-5xl">Exercise List</h2>
-          <ExerciseAccordion exercises={program.exercises} imageMap={exerciseImages} />
+          <ExerciseAccordion programSlug={program.slug} dayPlans={program.dayPlans} />
         </section>
 
         <section className="no-print mt-12 flex justify-center">

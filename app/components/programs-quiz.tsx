@@ -104,14 +104,15 @@ export default function ProgramsQuiz() {
           <p className="text-sm uppercase tracking-wider text-[#a3e635]">Recommended Program</p>
           <h3 className="mt-2 text-4xl">{result.name}</h3>
           <p className="mt-3 text-[#9ca3af]">
-            Based on your goal and training profile, this program gives the best balance of
-            progression, recovery, and long-term adherence.
+            Based on your answers, your best fit is <span className="text-white">{result.name}</span>.
+            {` `}
+            {result.scientificDescription}
           </p>
           <Link
             href={`/programs/${result.slug}`}
             className="mt-5 inline-flex rounded-full bg-[#a3e635] px-5 py-2 text-sm font-semibold text-[#0a0a0a] transition-all duration-300 hover:shadow-[0_0_20px_rgba(163,230,53,0.4)]"
           >
-            Open {result.name}
+            View My Program
           </Link>
         </article>
       )}
