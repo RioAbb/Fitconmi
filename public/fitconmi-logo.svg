@@ -1,0 +1,7 @@
+<svg width="260" height="64" viewBox="0 0 260 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="#111111" stroke="#A3E635" stroke-width="2"/>
+  <path d="M36.5 12L20 37.5H31L27.5 52L44 27H33L36.5 12Z" fill="#A3E635"/>
+  <path d="M24 20H42L39 24H30.5L28.5 27.5H38L35 31.5H26.5L24 35.5H31L28 39.5H19L24 20Z" fill="white"/>
+  <text x="74" y="42" fill="white" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="34" letter-spacing="0.5">Fit</text>
+  <text x="124" y="42" fill="#A3E635" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="34" letter-spacing="0.5">Conmi</text>
+</svg>
