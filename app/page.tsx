@@ -1,7 +1,7 @@
- "use client";
+"use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-
+import Link from "next/link";
 function BrandLogo() {
   return (
     <a href="#" className="flex items-center gap-2">
@@ -231,7 +231,7 @@ export default function Home() {
             <ul className="flex items-center gap-8 text-base text-white">
               {navLinks.map((link) => (
                 <li key={link}>
-                  <a className="transition-colors duration-300 hover:text-[#a3e635]" href="#">
+                  <a className="transition-colors duration-300 hover:text-[#a3e635]" href={link === "Programs" ? "/programs" : link === "Home" ? "/" : "#"}>
                     {link}
                   </a>
                 </li>
@@ -257,7 +257,7 @@ export default function Home() {
             <ul className="space-y-3 text-white">
               {navLinks.map((link) => (
                 <li key={link}>
-                  <a className="transition-colors duration-300 hover:text-[#a3e635]" href="#">
+                  <a className="transition-colors duration-300 hover:text-[#a3e635]" href={link === "Programs" ? "/programs" : link === "Home" ? "/" : "#"}>
                     {link}
                   </a>
                 </li>
@@ -280,9 +280,8 @@ export default function Home() {
           {heroImages.map((image, idx) => (
             <div
               key={image}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                idx === currentHero ? "opacity-100" : "opacity-0"
-              }`}
+              className={`absolute inset-0 transition-opacity duration-1000 ${idx === currentHero ? "opacity-100" : "opacity-0"
+                }`}
             >
               <img
                 src={image}
@@ -336,9 +335,8 @@ export default function Home() {
                 key={idx}
                 aria-label={`Go to slide ${idx + 1}`}
                 onClick={() => setCurrentHero(idx)}
-                className={`h-2.5 rounded-full transition-all ${
-                  idx === currentHero ? "w-8 bg-[#a3e635]" : "w-2.5 bg-white/60"
-                }`}
+                className={`h-2.5 rounded-full transition-all ${idx === currentHero ? "w-8 bg-[#a3e635]" : "w-2.5 bg-white/60"
+                  }`}
               />
             ))}
           </div>
@@ -396,52 +394,49 @@ export default function Home() {
           />
           <div className="pointer-events-none absolute inset-0 bg-[#0a0a0a]/70" />
           <div className="relative">
-          <h2 className="text-center text-5xl text-white sm:text-6xl">
-            Choose Your Path
-          </h2>
-          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {programs.map((program) => (
-              <article
-                key={program.title}
-                className="group rounded-2xl border border-white/10 bg-[#1a1a1a] p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(163,230,53,0.22)]"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(#1a1a1a,#1a1a1a), linear-gradient(120deg, rgba(163,230,53,0.9), rgba(163,230,53,0.05))",
-                  backgroundOrigin: "border-box",
-                  backgroundClip: "padding-box, border-box",
-                }}
-              >
-                <p className="text-4xl">{program.icon}</p>
-                <h3 className="mt-4 text-4xl text-white">{program.title}</h3>
-                <p className="text-sm uppercase tracking-wider text-[#a3e635]">
-                  {program.level}
-                </p>
-                <span className="mt-3 inline-flex rounded-full border border-[#a3e635]/40 bg-[#a3e635]/10 px-3 py-1 text-xs font-semibold text-[#a3e635]">
-                  {program.duration}
-                </span>
-                <div className="mt-5 space-y-2 text-[#9ca3af]">
-                  <p>
-                    <span className="text-white">Duration:</span> {program.duration}
-                  </p>
-                  <p>
-                    <span className="text-white">Workouts:</span> {program.workouts}
-                  </p>
-                  <p>
-                    <span className="text-white">Goal:</span> {program.goal}
-                  </p>
-                  <p>
-                    <span className="text-white">Key:</span> {program.key}
-                  </p>
-                </div>
-                <a
-                  href="#"
-                  className="mt-7 inline-flex rounded-full bg-[#a3e635] px-6 py-3 text-sm font-semibold text-[#0a0a0a] transition-all duration-300 group-hover:shadow-[0_0_24px_rgba(163,230,53,0.4)]"
+            <h2 className="text-center text-5xl text-white sm:text-6xl">
+              Choose Your Path
+            </h2>
+            <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+              {programs.map((program) => (
+                <article
+                  key={program.title}
+                  className="group rounded-2xl border border-white/10 bg-[#1a1a1a] p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(163,230,53,0.22)]"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(#1a1a1a,#1a1a1a), linear-gradient(120deg, rgba(163,230,53,0.9), rgba(163,230,53,0.05))",
+                    backgroundOrigin: "border-box",
+                    backgroundClip: "padding-box, border-box",
+                  }}
                 >
-                  {program.cta}
-                </a>
-              </article>
-            ))}
-          </div>
+                  <p className="text-4xl">{program.icon}</p>
+                  <h3 className="mt-4 text-4xl text-white">{program.title}</h3>
+                  <p className="text-sm uppercase tracking-wider text-[#a3e635]">
+                    {program.level}
+                  </p>
+                  <span className="mt-3 inline-flex rounded-full border border-[#a3e635]/40 bg-[#a3e635]/10 px-3 py-1 text-xs font-semibold text-[#a3e635]">
+                    {program.duration}
+                  </span>
+                  <div className="mt-5 space-y-2 text-[#9ca3af]">
+                    <p>
+                      <span className="text-white">Duration:</span> {program.duration}
+                    </p>
+                    <p>
+                      <span className="text-white">Workouts:</span> {program.workouts}
+                    </p>
+                    <p>
+                      <span className="text-white">Goal:</span> {program.goal}
+                    </p>
+                    <p>
+                      <span className="text-white">Key:</span> {program.key}
+                    </p>
+                  </div>
+                  <Link href="/programs" className="mt-7 inline-flex rounded-full bg-[#a3e635] px-6 py-3 text-sm font-semibold text-[#0a0a0a] transition-all duration-300 group-hover:shadow-[0_0_24px_rgba(163,230,53,0.4)]">
+                    {program.cta}
+                  </Link>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
