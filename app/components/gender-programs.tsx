@@ -270,7 +270,7 @@ function ProgramDetail({ prog, gender, dur, onBack }: { prog: Prog; gender: Gend
   const miles = isW ? MILE_W : MILE_M;
   const nutr = getNutr(prog.slug, gender);
   const heroImg = progImg(prog.slug, gender);
-  const milePh: [string, string, string][] = [["Week 1–2", dur.weeks >= 12 ? "Week 3–6" : "Week 3–4", dur.weeks >= 8 ? `Week 7–${dur.weeks}` : "Week 7+"], miles, miles];
+  const milePh: [string, string, string][] = [["Week 1–2", dur.weeks >= 12 ? "Week 3–6" : "Week 3–4", dur.weeks >= 8 ? `Week 7–${dur.weeks}` : "Week 7+"] as [string, string, string], miles as [string, string, string], miles as [string, string, string]];
 
   return (
     <article aria-label={`${prog.name} program detail`} style={{ maxWidth: "72rem", margin: "0 auto", padding: "3rem 1.5rem 6rem", width: "100%" }}>

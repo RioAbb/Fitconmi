@@ -40,6 +40,7 @@ export default function Home() {
   );
   const [currentHero, setCurrentHero] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
   const programs = [
     {
       title: "Beginner",
@@ -171,6 +172,12 @@ export default function Home() {
     }, 4000);
     return () => window.clearInterval(interval);
   }, [heroImages.length]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setIsVideoOpen(false); };
+    if (isVideoOpen) document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [isVideoOpen]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -308,17 +315,18 @@ export default function Home() {
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <a
-                href="#programs"
+                href="/programs"
                 className="rounded-full bg-[#a3e635] px-8 py-3 text-base font-bold text-[#0a0a0a] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_30px_rgba(163,230,53,0.45)]"
               >
                 START FREE PROGRAM
               </a>
-              <a
-                href="#method"
+              <button
+                onClick={() => setIsVideoOpen(true)}
+                aria-label="Watch how FitConmi works"
                 className="rounded-full border border-white/40 bg-black/25 px-8 py-3 text-base font-semibold text-white transition-all duration-300 hover:border-[#a3e635] hover:text-[#a3e635]"
               >
                 ▶ WATCH HOW IT WORKS
-              </a>
+              </button>
             </div>
           </div>
 
@@ -655,6 +663,78 @@ export default function Home() {
           </div>
         </footer>
       </main>
+
+      {/* Video Modal */}
+      {isVideoOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Fitness video"
+          onClick={() => setIsVideoOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 9999,
+            background: "rgba(0,0,0,0.95)",
+            backdropFilter: "blur(8px)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "1.5rem",
+            animation: "fcModalIn 0.3s ease",
+          }}
+        >
+          <style>{`@keyframes fcModalIn{from{opacity:0}to{opacity:1}}`}</style>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{ width: "90%", maxWidth: 900, position: "relative" }}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setIsVideoOpen(false)}
+              aria-label="Close video"
+              style={{
+                position: "absolute",
+                top: "-3rem",
+                right: 0,
+                background: "none",
+                border: "none",
+                color: "#fff",
+                fontSize: "2rem",
+                cursor: "pointer",
+                lineHeight: 1,
+                transition: "color 0.2s ease",
+              }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "#a3e635"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "#fff"; }}
+            >
+              &times;
+            </button>
+
+            {/* Heading */}
+            <div style={{ textAlign: "center", marginBottom: "1.5rem" }}>
+              <p style={{ color: "#fff", fontSize: "1.1rem", fontWeight: 700, margin: "0 0 0.4rem" }}>
+                Why Science-Based Fitness Changes Everything
+              </p>
+              <p style={{ color: "#9ca3af", fontSize: "0.875rem", margin: 0, maxWidth: 600, marginInline: "auto" }}>
+                Discover how modern training methods and evidence-based nutrition create sustainable results
+              </p>
+            </div>
+
+            {/* Video */}
+            <div style={{ aspectRatio: "16/9", width: "100%", borderRadius: 12, overflow: "hidden" }}>
+              <iframe
+                key={isVideoOpen ? "open" : "closed"}
+                src="https://www.youtube.com/embed/U8dNYlGTWIY?autoplay=1&rel=0&modestbranding=1"
+                title="Science-Based Fitness Explained"
+                allow="autoplay; fullscreen"
+                style={{ width: "100%", height: "100%", border: "none", borderRadius: 12 }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
